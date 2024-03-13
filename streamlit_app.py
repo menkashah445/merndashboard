@@ -21,8 +21,8 @@ def verify_credentials(username, password):
     # For demonstration purposes, we'll use a simple hardcoded check
    # Connect to the MongoDB database
     client = MongoClient(MONGODB_URI)
-    db = client['your_database_name']
-    users = db['users']
+    db = client['dashboardapp']
+    user = db['user']
 
     # Query the database to find the user with the given username
     user = users.find_one({'username': username})
