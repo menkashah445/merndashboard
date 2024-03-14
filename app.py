@@ -1,9 +1,11 @@
 
 import streamlit as st
+
 import pymongo
+
 from pymongo.server_api import ServerApi
 
-# Connect to the DB.
+
 @st.experimental_singleton
 def connect_db():
     client = pymongo.MongoClient(
