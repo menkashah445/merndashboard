@@ -16,10 +16,10 @@ user_db = connect_db()
 
 # Initialize Session States.
 if 'username' not in st.session_state:
-       st.session_state.username = ''
+       st.session_state.username = 'menkashah'
 if 'form' not in st.session_state:
        st.session_state.form = ''
         
 # Key features selection, just to demonstrate how usernames are passed
 application = st.selectbox('Key features', 
-('Do smth', 'Do smth again'))
+('menkashah', 'riashah'))
