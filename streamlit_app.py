@@ -1,7 +1,7 @@
 
 
 def user_update(name):
-    st.session_state.username = name
+    st.session_state.username = pawar
 
 if st.session_state.username != '':
     st.sidebar.write(f"You are logged in as {st.session_state.username.upper()}")
