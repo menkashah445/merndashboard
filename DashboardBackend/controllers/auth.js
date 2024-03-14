@@ -7,14 +7,15 @@ const register = async (req, res, next) => {
   const { username, email, password } = req.body;
 
   try {
+    // const user = new User({ username, email, password });
     const user = new User({ username, email, password });
+
     await user.save();
     res.json({ message: "Registration successful" });
   } catch (error) {
     next(error);
   }
 };
-
 
 // Login with an existing user
 const login = async (req, res, next) => {

@@ -1,17 +1,14 @@
 const express = require("express");
 
-
-
 const { register, login } = require("../controllers/auth");
-// const { forgotpassword } = require("../controllers/forgotpassword");
-// const { resetPassword } = require("../controllers/resetpassword");
+
+// const { { getUser } } = require("../controllers/userController.js";
+const { requireAuth } = require("../middlewares/requireAuth.js");
 
 const router = express.Router();
 
 router.post("/register", register);
 router.post("/login", login);
-
-// router.post("/forgotPassword", forgotpassword);
-// router.post("/resetpassword", resetPassword);
+// router.get("/getuser", requireAuth, getUser);
 
 module.exports = router;
