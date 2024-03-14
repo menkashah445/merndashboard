@@ -1,87 +1,49 @@
-# import streamlit as st
+import streamlit as st
+import requests
+def signup(): 
+  st.title("Sign Up")
 
-# # Create an empty container
-# placeholder = st.empty()
+    username = st.text_input("Username") 
+email = st.text_input("Email") 
+password = st.text_input("Password", type='password') 
+password_confirm = st.text_input("Confirm Password", type='password')
 
-# actual_email = "email"
-# actual_password = "password"
+if password != password_confirm: 
+  st.error("Passwords do not match!") return
 
-# # Insert a form in the container
-# with placeholder.form("login"):
-#     st.markdown("#### Enter your credentials")
-#     email = st.text_input("Email")
-#     password = st.text_input("Password", type="password")
-#     submit = st.form_submit_button("Login")
+res = requests.post("http://localhost:5000/signup", json={"username": username, "email": email, "password": password})
+if res.status_code == 200: 
+  st.success("Sign up successful! Please log in.") 
+else: 
+  st.error("Error signing up.")
 
-# if submit and email == actual_email and password == actual_password:
-#     # If the form is submitted and the email and password are correct,
-#     # clear the form/container and display a success message
-#     placeholder.empty()
-#     st.success("Login successful")
-# elif submit and email != actual_email and password != actual_password:
-#     st.error("Login failed")
-# else:
-#     pass
+def login(): 
+  st.title("Log In")
+email = st.text_input("Email") 
+password = st.text_input("Password", type='password')
 
-def select_signup():
-    st.session_state.form = 'signup_form'
+res = requests.post("http://localhost:5000/login", json={"email": email, "password": password})
+if res.status_code == 200: 
+  user_data = res.json() # Set user data in local storage st.success("Log in successful!") return user_data else: st.error("Error logging in.")
 
-def user_update(name):
-    st.session_state.username = name
+def display_profile(user_data):res = requests.get("http://localhost:5000/profile", headers={"Authorization": f"Bearer {user_data['access_token']}"}) 
+user_data = res.json()
 
-if st.session_state.username != '':
-    st.sidebar.write(f"You are logged in as {st.session_state.username.upper()}")
+st.title(user_data['username']) 
+st.image(user_data['profile_picture'], width=100) 
+st.write(f"Email: {user_data['email']}")
 
-# Initialize Sing In or Sign Up forms
-if st.session_state.form == 'signup_form' and st.session_state.username == '':
-  
-    signup_form = st.sidebar.form(key='signup_form', clear_on_submit=True)
-    new_username = signup_form.text_input(label='Enter Username*')
-    new_user_email = signup_form.text_input(label='Enter Email Address*')
-    new_user_pas = signup_form.text_input(label='Enter Password*', type='password')
-    user_pas_conf = signup_form.text_input(label='Confirm Password*', type='password')
-    note = signup_form.markdown('**required fields*')
-    signup = signup_form.form_submit_button(label='Sign Up')
-    
-    if signup:
-        if '' in [new_username, new_user_email, new_user_pas]:
-            st.sidebar.error('Some fields are missing')
-        else:
-            if user_db.find_one({'log' : new_username}):
-                st.sidebar.error('Username already exists')
-            if user_db.find_one({'email' : new_user_email}):
-                st.sidebar.error('Email is already registered')
-            else:
-                if new_user_pas != user_pas_conf:
-                    st.sidebar.error('Passwords do not match')
-                else:
-                    user_update(new_username)
-                    user_db.insert_one({'log' : new_username, 'email' : new_user_email, 'pass' : new_user_pas})
-                    st.sidebar.success('You have successfully registered!')
-                    st.sidebar.success(f"You are logged in as {new_username.upper()}")
-                    del new_user_pas, user_pas_conf
-                    
-elif st.session_state.username == '':
-    login_form = st.sidebar.form(key='signin_form', clear_on_submit=True)
-    username = login_form.text_input(label='Enter Username')
-    user_pas = login_form.text_input(label='Enter Password', type='password')
-    
-    if user_db.find_one({'log' : username, 'pass' : user_pas}):
-        login = login_form.form_submit_button(label='Sign In', on_click=user_update(username))
-        if login:
-            st.sidebar.success(f"You are logged in as {username.upper()}")
-            del user_pas
-    else:
-        login = login_form.form_submit_button(label='Sign In')
-        if login:
-            st.sidebar.error("Username or Password is incorrect. Please try again or create an account.")
-else:
-    logout = st.sidebar.button(label='Log Out')
-    if logout:
-        user_update('')
-        st.session_state.form = ''
+def main():
+    user_data = st.local_storage.get("user_data")
 
-# 'Create Account' button
-if st.session_state.username == "" and st.session_state.form != 'signup_form':
-    signup_request = st.sidebar.button('Create Account', on_click=select_signup)
-
+if user_data: 
+  display_profile(user_data)
+else: 
+if st.button("Sign Up"): 
+  signup() 
+if st.button("Log In"): 
+  user_data = login() 
+if user_data: 
+  st.local_storage.set("user_data", user_data)
+if name == 'main': 
+  main()
