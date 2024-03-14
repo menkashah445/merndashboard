@@ -1,11 +1,11 @@
 
+def select_signup():
+    st.session_state.form = 'signup_form'
 
 def user_update(name):
     st.session_state.username = name
 
-if hasattr(st.session_state, 'username') and st.session_state.username != '':
-    # Your code here
-
+if st.session_state.username != '':
     st.sidebar.write(f"You are logged in as {st.session_state.username.upper()}")
 
 # Initialize Sing In or Sign Up forms
@@ -60,3 +60,4 @@ else:
 # 'Create Account' button
 if st.session_state.username == "" and st.session_state.form != 'signup_form':
     signup_request = st.sidebar.button('Create Account', on_click=select_signup)
+view rawstreamlit_singin_2.py hosted with ❤ by GitHub
