@@ -5,14 +5,14 @@ import streamlit as st
 
 
 @st.experimental_singleton
-def connect_db():
+def connectDB():
     client = pymongo.MongoClient(
       st.secrets["mongo"]["connection_url"], 
       server_api=ServerApi('1'))
     db = client.get_database('main')
-    return db.users
+    return db.User
 
-user_db = connect_db()
+User = connectDB()
 
 # Initialize Session States.
 if 'username' not in st.session_state:
