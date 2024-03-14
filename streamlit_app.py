@@ -3,7 +3,9 @@
 def user_update(name):
     st.session_state.username = name
 
-if st.session_state.username != '':
+if hasattr(st.session_state, 'username') and st.session_state.username != '':
+    # Your code here
+
     st.sidebar.write(f"You are logged in as {st.session_state.username.upper()}")
 
 # Initialize Sing In or Sign Up forms
