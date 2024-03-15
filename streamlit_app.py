@@ -8,8 +8,10 @@ email = st.text_input("Email")
 password = st.text_input("Password", type='password') 
 password_confirm = st.text_input("Confirm Password", type='password')
 
-if password != password_confirm: 
-  st.error("Passwords do not match!") return
+if password != password_confirm:
+    st.error("Passwords do not match!")
+    return
+
 
 res = requests.post("http://localhost:5000/signup", json={"username": username, "email": email, "password": password})
 if res.status_code == 200: 
