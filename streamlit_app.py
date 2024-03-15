@@ -20,7 +20,7 @@ def login():
     res = requests.post("http://localhost:8000/auth/login", json={"email": email, "password": password})
     if res.status_code == 200:
         user_data = res.json()
-        res = requests.get("http://localhost:5000/profile", headers={"Authorization": f"Bearer {user_data['access_token']}"})
+        res = requests.get("http://localhost:8000/user/profile", headers={"Authorization": f"Bearer {user_data['access_token']}"})
         user_data = res.json()
         st.success("Log in successful!")
         st.session_state.user_data = user_data
