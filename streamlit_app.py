@@ -7,9 +7,10 @@ def signup():
     email = st.text_input("Email")
     password = st.text_input("Password", type='password')
     password_confirm = st.text_input("Confirm Password", type='password')
-    submit = st.form_submit_button("Signup")
 
-    # Add your signup logic here
+    if st.button("Signup"):
+        # Add your signup logic here
+        pass
 
 # Add the rest of your Streamlit app code here
 
