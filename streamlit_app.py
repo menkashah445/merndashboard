@@ -16,7 +16,7 @@ def login():
     st.title("Log In")
     email = st.text_input("Email")
     password = st.text_input("Password", type='password')
-    res = requests.post("http://localhost:8000/auth/login", json={"email": email, "password": password})
+    res = requests.get("http://localhost:8000/auth/login", json={"email": email, "password": password})
     if res.status_code == 200:
         user_data = res.json()
         st.success("Log in successful!")
