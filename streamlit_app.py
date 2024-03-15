@@ -42,7 +42,7 @@ if user_data:
   display_profile(user_data)
   
 else: 
-if st.button("Sign Up"):
+ if st.button("Sign Up"):
     signup()
 if st.button("Log In"):
     user_data = login()
