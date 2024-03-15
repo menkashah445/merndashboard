@@ -1,12 +1,5 @@
 import streamlit as st
 import requests
-import streamlit as st
-
-# Initialize session state
-if 'user_data' not in st.session_state:
-    st.session_state.user_data = None
-
-# Your other Streamlit app code here
 
 def signup():
     st.title("Sign Up")
