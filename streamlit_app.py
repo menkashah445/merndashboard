@@ -6,7 +6,7 @@ def signup():
     username = st.text_input("Username")
     email = st.text_input("Email")
     password = st.text_input("Password", type='password')
-    password_confirm = st.text_input("Confirm Password", type='password')
+   
 
     if st.button("Signup"):
         # Add your signup logic here
