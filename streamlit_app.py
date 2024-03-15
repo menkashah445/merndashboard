@@ -41,11 +41,12 @@ def main():
 if user_data: 
   display_profile(user_data)
 else: 
-if st.button("Sign Up"): 
-  signup() 
-if st.button("Log In"): 
-  user_data = login() 
-if user_data: 
-  st.local_storage.set("user_data", user_data)
-if name == 'main': 
-  main()
+if st.button("Sign Up"):
+    signup()
+if st.button("Log In"):
+    user_data = login()
+if user_data:
+    st.local_storage.set("user_data", user_data)
+
+if __name__ == '__main__':
+    main()
