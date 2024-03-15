@@ -40,6 +40,7 @@ def main():
 
 if user_data: 
   display_profile(user_data)
+  
 else: 
 if st.button("Sign Up"):
     signup()
