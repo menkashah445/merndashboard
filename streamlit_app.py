@@ -7,7 +7,7 @@ def signup():
     email = st.text_input("Email")
     password = st.text_input("Password", type='password')
     submit = st.form_submit_button("Login")
-    res = requests.post("http://localhost:8000/auth/register", json={"username": username, "email": email, "password": password})
+    res = requests.post(http://localhost:8000/auth/register, json={"username": username, "email": email, "password": password})
     if res.status_code == 200:
         st.success("Sign up successful! Please log in.")
     else:
@@ -17,7 +17,7 @@ def login():
     st.title("Log In")
     email = st.text_input("Email")
     password = st.text_input("Password", type='password')
-    res = requests.get("http://localhost:8000/auth/login", json={"email": email, "password": password})
+    res = requests.post(http://localhost:8000/auth/login, json={"email": email, "password": password})
     if res.status_code == 200:
         user_data = res.json()
         st.success("Log in successful!")
