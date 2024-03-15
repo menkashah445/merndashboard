@@ -32,8 +32,8 @@ def display_profile():
     st.write(f"Email: {user_data['email']}")
 
 def main():
-    st.title("Streamlit Chat App")
-    st.write("Welcome to the Streamlit Chat App! Please sign up or log in to get started.")
+    st.title("DASHBOARD")
+    st.write("Welcome to the Bobble DashBoard! Please sign up or log in to get started.")
     if 'user_data' not in st.session_state:
         st.session_state.user_data = None
 
