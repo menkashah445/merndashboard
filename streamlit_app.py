@@ -40,7 +40,7 @@ def display_profile(user_data):
     st.write(f"Email: {user_data['email']}")
 
 def main():
-    user_data = st.local_session_state.user_data
+    # user_data = st.local_session_state.user_data
 
     if user_data:
         display_profile(user_data)
@@ -53,4 +53,4 @@ def main():
             st.local_session_state.user_data = user_data
 
 if __name__ == '__main__':
-    main()
+    # main()
