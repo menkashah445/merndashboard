@@ -6,7 +6,7 @@ def signup():
     username = st.text_input("Username")
     email = st.text_input("Email")
     password = st.text_input("Password", type='password')
-    res = requests.post("http://localhost:8000/auth/login", json={"username": username, "email": email, "password": password})
+    res = requests.post("http://localhost:8000/auth/register", json={"username": username, "email": email, "password": password})
     if res.status_code == 200:
         st.success("Sign up successful! Please log in.")
     else:
@@ -28,7 +28,7 @@ def login():
 def display_profile():
     user_data = st.session_state.user_data
     st.title(user_data['username'])
-    st.image(user_data['profile_picture'], width=100)
+    # st.image(user_data['profile_picture'], width=100)
     st.write(f"Email: {user_data['email']}")
 
 def main():
