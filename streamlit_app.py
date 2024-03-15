@@ -20,11 +20,13 @@ def login():
     if res.status_code == 200:
         user_data = res.json()
         st.success("Log in successful!")
+        st.session_state.user_data = user_data
         return user_data
     else:
         st.error("Error logging in.")
 
-def display_profile(user_data):
+def display_profile():
+    user_data = st.session_state.user_data
     st.title(user_data['username'])
     st.image(user_data['profile_picture'], width=100)
     st.write(f"Email: {user_data['email']}")
@@ -32,16 +34,18 @@ def display_profile(user_data):
 def main():
     st.title("Streamlit Chat App")
     st.write("Welcome to the Streamlit Chat App! Please sign up or log in to get started.")
-    user_data = st.local_storage.get("user_data")
-    if user_data:
-        display_profile(user_data)
+    if 'user_data' not in st.session_state:
+        st.session_state.user_data = None
+
+    if st.session_state.user_data:
+        display_profile()
     else:
         if st.button("Sign Up"):
             signup()
         if st.button("Log In"):
             user_data = login()
-        if user_data:
-            st.local_storage.set("user_data", user_data)
+            if user_data:
+                st.session_state.user_data = user_data
 
 if __name__ == '__main__':
     main()
