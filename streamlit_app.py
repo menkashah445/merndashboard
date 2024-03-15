@@ -11,6 +11,7 @@ def signup():
     if st.button("Signup"):
         # Add your signup logic here
         pass
+        res = requests.post("http://localhost:8000/signup", json={"username": username, "email": email, "password": password})
 
 # Add the rest of your Streamlit app code here
 
