@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
-
+const Schema = mongoose.Schema;
+const bcryptSalt = process.env.BCRYPT_SALT;
 const userSchema = new mongoose.Schema(
   {
     username: {
@@ -18,9 +19,9 @@ const userSchema = new mongoose.Schema(
       required: true,
     },
     resetToken: {
-       type: String, 
-       required: false 
-      },
+      type: String,
+      required: false,
+    },
     role: {
       type: String,
       enum: ["user", "admin"],
@@ -52,3 +53,4 @@ userSchema.methods.comparePassword = async function (password) {
 const User = mongoose.model("User", userSchema);
 
 module.exports = User;
+

@@ -1,37 +1,31 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
-const ForgetPassword = () => {
-  const [formData, setFormData] = useState({
-    email: "",
-    password: "",
-  });
-
+const ForgotPassword = () => {
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
   const navigate = useNavigate();
 
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    setEmail(e.target.value);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "http://localhost:8000/auth/login",
-        formData
+        "http://localhost:8000/auth/forgotPassword",
+        { email }
       );
-      console.log(response.data);
-
-      localStorage.setItem("token", response.data);
-      console.log(response.data.token);
-      navigate("/");
-      // Optionally, you can redirect the user to another page upon successful login
+      setMessage(response.data.message);
+      const { resetToken } = response.data;
+      navigate(`/resetPassword?token=${resetToken}`);
     } catch (error) {
-      console.error("Error logging in:", error);
+      console.error("Error sending reset email:", error.response.data.message);
+      setMessage(error.response.data.message);
     }
   };
-
   return (
     <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-sm">
@@ -54,7 +48,7 @@ const ForgetPassword = () => {
                 id="email"
                 name="email"
                 type="email"
-                value={formData.email}
+                value={email}
                 onChange={handleChange}
                 autoComplete="email"
                 required
@@ -72,11 +66,10 @@ const ForgetPassword = () => {
             </button>
           </div>
         </form>
-
-       
+        {message && <p className="mt-3 text-center text-gray-700">{message}</p>}
       </div>
     </div>
   );
 };
 
-export default ForgetPassword;
+export default ForgotPassword;
