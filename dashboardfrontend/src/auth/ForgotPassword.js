@@ -2,15 +2,22 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
+// useState(""): Initializes the email state to an empty string and the
+//  message state to an empty string.
+// navigate variable with the useNavigate hook, which provides a
+// function to navigate to different routes in the application.
 const ForgotPassword = () => {
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
   const navigate = useNavigate();
 
+  // This handleChange function is used to update the email state in
+  // response to changes in an input field's value
   const handleChange = (e) => {
     setEmail(e.target.value);
   };
 
+  // This handleSubmit function is called when the form is submitted. It prevents the default form submission behavior (e.preventDefault()) and then sends a POST request to the server to initiate the password reset process.
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -26,6 +33,7 @@ const ForgotPassword = () => {
       setMessage(error.response.data.message);
     }
   };
+
   return (
     <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-sm">

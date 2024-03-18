@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 
+
+
+// This Login component uses the useState hook to manage form data for email and password fields. The initial state of the formData object includes empty strings for the email and password fields.
 const Login = () => {
   const [formData, setFormData] = useState({
     email: "",
@@ -22,7 +25,6 @@ const Login = () => {
         formData
       );
       console.log(response.data);
-
       localStorage.setItem("token", response.data);
       console.log(response.data.token);
       navigate("/");

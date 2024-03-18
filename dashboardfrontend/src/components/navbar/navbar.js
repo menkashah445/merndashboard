@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+
 const Navbar = () => {
   const token = localStorage.getItem("token");
   const navigate = useNavigate();
@@ -11,6 +12,10 @@ const Navbar = () => {
     // Token doesn't exist, user is not logged in
     console.log("User is not logged in");
   }
+
+  //this code demonstrates how to use the useState hook to manage the visibility of menus
+  // and how to handle logout functionality in a React component.
+
   // Retrieve user data from localStorage
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isMainMenuOpen, setIsMainMenuOpen] = useState(false);
@@ -27,6 +32,7 @@ const Navbar = () => {
     // Redirect to login page
     navigate("/login");
   };
+
   return (
     <header class="absolute inset-x-0 top-0 z-50">
       <nav

@@ -4,6 +4,7 @@ const User = require("../models/User");
 
 // for forgot password
 const forgotPassword = async (req, res, next) => {
+  // extract the email from req body
   const { email } = req.body;
 
   try {
@@ -11,21 +12,12 @@ const forgotPassword = async (req, res, next) => {
     if (!user) {
       return res.status(404).json({ message: "User not found" });
     }
-
     // Generate a unique token for password reset
-    const resetToken = jwt.sign({ userId: user._id }, "mysecret", {
+    const resetToken = jwt.sign({ userId: user._id }, process.env.SECRET_KEY, {
       expiresIn: "1 hour",
     });
-
-    // Save the reset token and expiry date to the user document
-    // user.resetPasswordToken = resetToken;
-    // user.resetPasswordExpires = Date.now() + 3600000; // Token expires in 1 hour
-    // await user.save();
-
     console.log("Reset token:", resetToken);
     res.json({ resetToken, userId: user._id });
-
-    // res.json({ message: "Password reset email sent successfully" });
   } catch (error) {
     next(error);
   }

@@ -36,6 +36,9 @@ userSchema.pre("save", async function (next) {
   const user = this;
   if (!user.isModified("password")) return next();
 
+  //generate salt from bcrypt libaray after that hash salt with password 
+  // set hashed password in userpassword filed
+  // if accur any error call the next error middleware fun
   try {
     const salt = await bcrypt.genSalt();
     user.password = await bcrypt.hash(user.password, salt);
