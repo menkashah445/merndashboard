@@ -29,7 +29,7 @@ const resetPassword = async (req, res, next) => {
 
   try {
     // Verify and decode the JWT token
-    const decoded = jwt.verify(token, "mysecret");
+    const decoded = jwt.verify(token, "mysecretkey");
     // Check if token has expired
     if (decoded.exp < Date.now() / 1000) {
       return res.status(400).json({ message: "Token has expired" });
