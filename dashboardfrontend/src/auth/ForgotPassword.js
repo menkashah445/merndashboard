@@ -29,8 +29,15 @@ const ForgotPassword = () => {
       const { resetToken } = response.data;
       navigate(`/resetPassword?token=${resetToken}`);
     } catch (error) {
-      console.error("Error sending reset email:", error.response.data.message);
-      setMessage(error.response.data.message);
+      if (
+        error.response &&
+        error.response.data &&
+        error.response.data.message
+      ) {
+        setMessage(error.response.data.message);
+      } else {
+        setMessage("An error occurred. Please try again.");
+      }
     }
   };
 

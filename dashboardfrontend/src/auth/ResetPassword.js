@@ -3,7 +3,6 @@ import { useLocation } from "react-router-dom";
 import axios from "axios";
 // import React from 'react';
 
-
 const ResetPassword = () => {
   const location = useLocation();
   const [token, setToken] = useState("");

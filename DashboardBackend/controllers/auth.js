@@ -30,18 +30,15 @@ const resetPassword = async (req, res, next) => {
   try {
     // Verify and decode the JWT token
     const decoded = jwt.verify(token, "mysecret");
-
     // Check if token has expired
     if (decoded.exp < Date.now() / 1000) {
       return res.status(400).json({ message: "Token has expired" });
     }
-
     // Find user by user ID from token
     const user = await User.findById(decoded.userId);
     if (!user) {
       return res.status(404).json({ message: "User not found" });
     }
-
     // Update user's password in the database
     user.password = newPassword;
     await user.save();

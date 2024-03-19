@@ -1,0 +1,8 @@
+{
+  "projects": {
+    "default": "dashboard-33fea",
+    "dashboard-33fea": "dashboard-33fea"
+  },
+  "targets": {},
+  "etags": {}
+}
