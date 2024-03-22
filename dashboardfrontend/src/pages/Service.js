@@ -3,7 +3,7 @@ import React from "react";
 const FeedBack = () => {
   return (
     <>
-      <h1>About</h1>
+      <h1>FeedBack</h1>
     </>
   );
 };

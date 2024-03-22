@@ -1,7 +1,7 @@
-import React from "react";
-import { slide as Menu } from "react-burger-menu";
+import React from 'react';
+import { slide as Menu } from 'react-burger-menu';
 
-const Sidebar = (props) => {
+const Sidebar = props => {
   return (
     <Menu>
       <a className="menu-item" href="/">
