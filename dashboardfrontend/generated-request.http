@@ -2,7 +2,7 @@ POST http://localhost:8000/auth/register
 Content-Type: application/json
 
 {
-  "username": "ayush jain",
-  "email": "ayush2202ksr@gmail.com",
-  "password": "1234567"
+  "username": "menka shah",
+  "email": "shahmenka@gmail.com",
+  "password": "12345678"
 }
